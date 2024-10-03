@@ -1,6 +1,6 @@
-const apiKey = '08266215fdd3a60eea2ab24692eb4049'; // Ganti dengan API key dari OpenWeather
+const apiKey = '08266215fdd3a60eea2ab24692eb4049'; 
 
-// Fungsi untuk mendapatkan cuaca saat ini dan ramalan cuaca
+
 async function getWeather() {
     const city = document.getElementById('city').value;
     if (!city) {
@@ -9,11 +9,9 @@ async function getWeather() {
     }
 
     try {
-        // URL untuk cuaca saat ini
         const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
         const weatherData = await weatherResponse.json();
 
-        // URL untuk ramalan cuaca 5 hari (3 jam per interval)
         const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`);
         const forecastData = await forecastResponse.json();
 
@@ -25,7 +23,7 @@ async function getWeather() {
     }
 }
 
-// Fungsi untuk menampilkan informasi cuaca saat ini
+
 function displayWeatherInfo(data) {
     const weatherDiv = document.getElementById('weather-info');
     weatherDiv.innerHTML = `
@@ -40,12 +38,12 @@ function displayWeatherInfo(data) {
     `;
 }
 
-// Fungsi untuk menampilkan ramalan cuaca 5 hari
+
 function displayForecastInfo(data) {
     const forecastDiv = document.getElementById('forecast-info');
     forecastDiv.innerHTML = '<h2>5 Day Forecast</h2>';
 
-    // Hanya tampilkan 3 kali per hari (pagi, siang, malam)
+
     for (let i = 0; i < data.list.length; i += 8) {
         const day = data.list[i];
         const date = new Date(day.dt_txt);
